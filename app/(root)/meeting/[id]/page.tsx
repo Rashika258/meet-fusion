@@ -1,5 +1,6 @@
 "use client";
 
+import Alert from "@/components/Alert";
 import Loader from "@/components/Loader";
 import MeetingRoom from "@/components/MeetingRoom";
 import MeetingSetup from "@/components/MeetingSetup";
@@ -10,10 +11,14 @@ import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const MeetingPage = () => {
+
   const { id } = useParams();
   const { isLoaded, user } = useUser();
   const { call, isCallLoading } = useGetCallById(id);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
+
+  console.log('isLoaded', isLoaded, isCallLoading,!isLoaded || isCallLoading);
+  
 
   if (!isLoaded || isCallLoading) {
     return <Loader />;
@@ -29,7 +34,12 @@ const MeetingPage = () => {
 
   const notAllowed =
     call.type === "invalid" &&
-    (!user || !call.state.members.find((m) => m.user.id === user.id));
+    (!user || !call.state.members.find((m) => m.user.id === user?.id));
+    if (notAllowed) return <Alert title="You are not allowed to join this meeting" />;
+
+
+    console.log('isSetupComplete', isSetupComplete);
+    
 
   return (
     <main className="h-screen w-full">

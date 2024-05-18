@@ -5,7 +5,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useGetCallById } from "@/hooks/useGetCallById";
 import { useUser } from "@clerk/nextjs";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Table = (
     {
@@ -38,6 +38,7 @@ const PersonalRoom = () => {
     const { call } = useGetCallById(meetingId!);
   
     const startRoom = async () => {
+        
       if (!client || !user) return;
   
       const newCall = client.call("default", meetingId!);
