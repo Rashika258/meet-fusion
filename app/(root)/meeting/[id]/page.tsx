@@ -18,6 +18,7 @@ const MeetingPage = () => {
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   console.log('isLoaded', isLoaded, isCallLoading,!isLoaded || isCallLoading);
+  console.log('call2134567===================', call);
   
 
   if (!isLoaded || isCallLoading) {
